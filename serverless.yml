@@ -22,3 +22,10 @@ environment:
 functions:
   main:
     handler: dist/main.handler
+    events:
+      - http:
+          method: ANY
+          path: /
+      - http:
+          method: ANY
+          path: '{proxy+}'
