@@ -1,9 +1,9 @@
 import { Column, Entity, ManyToOne, JoinColumn, PrimaryColumn } from 'typeorm';
-import { CartDB } from './cart.entity';
+import { CartEntity } from './cart.entity';
 
-@Entity()
-export class CartItemsDB {
-    @PrimaryColumn({ type: 'uuid', nullable: false})
+@Entity('Cart_items')
+export class CartItemEntity {
+    @PrimaryColumn('uuid')
     cartId: string;
 
     @Column({ type: 'uuid', nullable: false})
@@ -12,7 +12,7 @@ export class CartItemsDB {
     @Column({ type: 'integer', nullable: false})
     count: number;
 
-    @ManyToOne(() => CartDB)
+    @ManyToOne(() => CartEntity, { nullable: false })
     @JoinColumn({name: 'cart_id', referencedColumnName: 'id'})
-    cart: CartDB;
+    cart: CartEntity;
 }

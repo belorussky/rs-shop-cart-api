@@ -1,23 +1,23 @@
-import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { CartItemsDB } from './cart-items.entity';
-import { OrdersDB } from './orders.entity';
+import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { CartItemEntity } from './cart-items.entity';
+import { OrdersEntity } from './orders.entity';
 
-@Entity()
-export class CartDB {
+@Entity('Carts')
+export class CartEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ type: 'date', nullable: false})
+    @CreateDateColumn({name: 'created_at', type: Date, nullable: false})
     createdAt: Date;
 
-    @Column({ type: 'date', nullable: false})
+    @UpdateDateColumn({name: 'updated_at', type: Date, nullable: false})
     updatedAt: Date;
 
-    @OneToMany(() => CartItemsDB, (cartItems) => cartItems.cart)
+    @OneToMany(() => CartItemEntity, (cartItems) => cartItems.cart)
     @JoinColumn({name: 'id', referencedColumnName: 'cart_id'})
-    cartItems: CartItemsDB[];
+    cartItems: CartItemEntity[];
 
-    @OneToOne(() => OrdersDB)
+    @OneToOne(() => OrdersEntity)
     @JoinColumn({name: 'id', referencedColumnName: 'cart_id'})
-    orders: OrdersDB;
+    orders: OrdersEntity;
 }

@@ -1,7 +1,8 @@
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import serverlessExpress from '@vendia/serverless-express';
 import { Callback, Context, Handler } from 'aws-lambda';
-// import * as helmet from 'helmet';
+import helmet from 'helmet';
 import { AppModule } from './app.module';
 
 let server: Handler;
@@ -9,6 +10,20 @@ let server: Handler;
 
 async function bootstrap(): Promise<Handler> {
   const app = await NestFactory.create(AppModule);
+
+  app.enableCors({
+    origin: (req, callback) => callback(null, true),
+  });
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      // enableDebugMessages: true,
+      transform: true
+    })
+  );
+
+  app.use(helmet());
+  
   await app.init();
 
   const expressApp = app.getHttpAdapter().getInstance();

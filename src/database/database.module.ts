@@ -1,8 +1,8 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {SnakeNamingStrategy} from 'typeorm-naming-strategies';
-import { CartDB } from './entities/cart.entity';
-import { CartItemsDB } from './entities/cart-items.entity';
+import { CartEntity } from './entities/cart.entity';
+import { CartItemEntity } from './entities/cart-items.entity';
 
 @Module({
     imports: [
@@ -17,7 +17,7 @@ import { CartItemsDB } from './entities/cart-items.entity';
             logging: true,
             namingStrategy: new SnakeNamingStrategy(),
         }),
-        TypeOrmModule.forFeature([CartDB, CartItemsDB]),
+        TypeOrmModule.forFeature([CartEntity, CartItemEntity]),
     ],
     exports: [TypeOrmModule],
 })
