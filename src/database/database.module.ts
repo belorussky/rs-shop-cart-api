@@ -6,18 +6,21 @@ import { CartItemEntity } from './entities/cart-items.entity';
 
 @Module({
     imports: [
-        TypeOrmModule.forRoot({
-            type: 'postgres',
-            host: process.env.PG_HOST,
-            port: +process.env.PG_PORT,
-            username: process.env.PG_USERNAME,
-            password: process.env.PG_PASSWORD,
-            database: process.env.PG_DATABASE,
-            entities: ['dist/datbase/entities/*.entity{.ts, .js}'],
-            logging: true,
-            namingStrategy: new SnakeNamingStrategy(),
+        TypeOrmModule.forRootAsync({
+            useFactory: () => ({
+                type: 'postgres',
+                host: process.env.PG_HOST,
+                port: +process.env.PG_PORT,
+                username: process.env.PG_USERNAME,
+                password: process.env.PG_PASSWORD,
+                database: process.env.PG_DATABASE,
+                entities: ['dist/datbase/entities/*.entity{.ts, .js}'],
+                synchronize: true,
+            }),
+            // logging: true,
+            // namingStrategy: new SnakeNamingStrategy(),
         }),
-        TypeOrmModule.forFeature([CartEntity, CartItemEntity]),
+        // TypeOrmModule.forFeature([CartEntity, CartItemEntity]),
     ],
     exports: [TypeOrmModule],
 })
