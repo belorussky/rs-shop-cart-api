@@ -27,27 +27,27 @@ export class CartController {
     }
   }
 
-  @Get('all')
-  findAllCarts(@Req() req: AppRequest) {
-    const cart = this.cartService.findAll();
+  // @Get('all')
+  // findAllCarts(@Req() req: AppRequest) {
+  //   const cart = this.cartService.findAll();
 
-    return {
-      statusCode: HttpStatus.OK,
-      message: 'OK',
-      data: { cart },
-    }
-  }
+  //   return {
+  //     statusCode: HttpStatus.OK,
+  //     message: 'OK',
+  //     data: { cart },
+  //   }
+  // }
 
-  @Get('all/cart-items')
-  findAllCartItems(@Req() req: AppRequest) {
-    const cart = this.cartService.findCartItemsByCartId(getUserIdFromRequest(req));
+  // @Get('all/cart-items')
+  // findAllCartItems(@Req() req: AppRequest) {
+  //   const cart = this.cartService.findCartItemsByCartId(getUserIdFromRequest(req));
 
-    return {
-      statusCode: HttpStatus.OK,
-      message: 'OK',
-      data: { cart },
-    }
-  }
+  //   return {
+  //     statusCode: HttpStatus.OK,
+  //     message: 'OK',
+  //     data: { cart },
+  //   }
+  // }
 
   // @UseGuards(JwtAuthGuard)
   // @UseGuards(BasicAuthGuard)
@@ -65,18 +65,18 @@ export class CartController {
     }
   }
 
-  @Put('test')
-  updateCart(@Body() body) { // TODO: validate body payload...
-    const cart = this.cartService.create(body);
+  // @Put('test')
+  // updateCart(@Body() body) { // TODO: validate body payload...
+  //   const cart = this.cartService.create(body);
 
-    return {
-      statusCode: HttpStatus.OK,
-      message: 'OK',
-      data: {
-        cart
-      }
-    }
-  }
+  //   return {
+  //     statusCode: HttpStatus.OK,
+  //     message: 'OK',
+  //     data: {
+  //       cart
+  //     }
+  //   }
+  // }
 
   // @UseGuards(JwtAuthGuard)
   // @UseGuards(BasicAuthGuard)

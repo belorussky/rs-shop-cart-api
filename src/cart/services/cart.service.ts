@@ -3,43 +3,43 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { v4 } from 'uuid';
 import { Cart } from '../models';
-import { CartDB } from '../../database/entities/cart.entity';
+import { CartEntity } from '../../database/entities/cart.entity';
 
 
 @Injectable()
 export class CartService {
-  constructor(
-    @InjectRepository(CartDB)
-    private readonly cartRepo: Repository<CartDB>,
-  ) {}
+  // constructor(
+  //   @InjectRepository(CartEntity)
+  //   private readonly cartRepo: Repository<CartEntity>,
+  // ) {}
 
   private userCarts: Record<string, Cart> = {};
 
-  async create(body) {
-    try {
-      await this.cartRepo.insert(body);
-    } catch (e) {
-      console.error(e);
-      return false;
-    }
-    return true;
-  }
+  // async create(body) {
+  //   try {
+  //     await this.cartRepo.insert(body);
+  //   } catch (e) {
+  //     console.error(e);
+  //     return false;
+  //   }
+  //   return true;
+  // }
 
-  async findAll() {
-    return this.cartRepo.find();
-  }
+  // async findAll() {
+  //   return this.cartRepo.find();
+  // }
 
-  async findCartById(id: string) {
-    return this.cartRepo.findOne({ id });
-  }
+  // async findCartById(id: string) {
+  //   return this.findOne({ id });
+  // }
 
-  async findCartItemsByCartId(id: string) {
-    const cartItems = await this.cartRepo.findOne(
-      { id },
-      { relations: ['cartItems'] },
-    );
-    return this.cartRepo.find();
-  }
+  // async findCartItemsByCartId(id: string) {
+  //   const cartItems = await this.cartRepo.findOne(
+  //     { id },
+  //     { relations: ['cartItems'] },
+  //   );
+  //   return this.cartRepo.find();
+  // }
 
   findByUserId(userId: string): Cart {
     return this.userCarts[ userId ];
