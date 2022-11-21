@@ -46,6 +46,8 @@ USER node
 
 FROM node:12.16.3-alpine As production
 
+ENV NODE_ENV production
+
 COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node --from=build /usr/src/app/dist ./dist
 
